@@ -4,10 +4,12 @@ defmodule JustMetrics.Metrics do
   """
 
   import Ecto.Query, warn: false
+
   alias Ecto.Repo
   alias JustMetrics.Repo
 
   alias JustMetrics.Metrics.Metric
+  alias JustMetrics.Accounts.User
 
   @doc """
   Returns the list of metrics.
@@ -23,6 +25,8 @@ defmodule JustMetrics.Metrics do
   end
 
   def list_metrics_for_user(user) do
+    # the ^ (pin) operator is used to inject elixir variables 
+    # and expressions into queries
     Repo.all(from m in Metric, where: m.user_id == ^user.id)
   end
 
@@ -47,16 +51,16 @@ defmodule JustMetrics.Metrics do
 
   ## Examples
 
-      iex> create_metric(%{field: value})
+      iex> create_metric(%{field: value}, %User{id: value})
       {:ok, %Metric{}}
 
       iex> create_metric(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_metric(attrs \\ %{}, current_user) do
+  def create_metric(attrs, %User{ id: user_id }) do
     %Metric{}
-    |> Metric.changeset(Map.put(attrs, "user_id", current_user.id))
+    |> Metric.changeset(Map.put(attrs, "user_id", user_id))
     |> Repo.insert()
   end
 
