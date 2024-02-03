@@ -5,7 +5,7 @@ defmodule JustMetrics.Repo.Migrations.CreateMetrics do
     create table(:metrics) do
       add :name, :string
       add :unit, :string
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :nothing), null: false
 
       timestamps(type: :utc_datetime)
     end

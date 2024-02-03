@@ -1,0 +1,24 @@
+<.header>
+  Listing Measurements
+  <:actions>
+    <.link href={~p"/measurements/new"}>
+      <.button>New Measurement</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="measurements" rows={@measurements} row_click={&JS.navigate(~p"/measurements/#{&1}")}>
+  <:col :let={measurement} label="Ts"><%= measurement.ts %></:col>
+  <:col :let={measurement} label="Value"><%= measurement.value %></:col>
+  <:action :let={measurement}>
+    <div class="sr-only">
+      <.link navigate={~p"/measurements/#{measurement}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/measurements/#{measurement}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={measurement}>
+    <.link href={~p"/measurements/#{measurement}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

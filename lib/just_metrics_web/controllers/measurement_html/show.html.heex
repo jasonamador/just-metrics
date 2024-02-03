@@ -1,0 +1,17 @@
+<.header>
+  Measurement <%= @measurement.id %>
+  <:subtitle>This is a measurement record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/measurements/#{@measurement}/edit"}>
+      <.button>Edit measurement</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Ts"><%= @measurement.ts %></:item>
+  <:item title="Value"><%= @measurement.value %></:item>
+  <:item title="Metric ID"><%= @measurement.metric_id %></:item>
+</.list>
+
+<.back navigate={~p"/measurements"}>Back to measurements</.back>

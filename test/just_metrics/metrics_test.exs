@@ -110,4 +110,62 @@ defmodule JustMetrics.MetricsTest do
       assert %Ecto.Changeset{} = Metrics.change_metric(metric)
     end
   end
+
+  describe "measurements" do
+    alias JustMetrics.Metrics.Measurement
+
+    import JustMetrics.MetricsFixtures
+
+    @invalid_attrs %{ts: nil, value: nil}
+
+    test "list_measurements/0 returns all measurements" do
+      measurement = measurement_fixture()
+      assert Metrics.list_measurements() == [measurement]
+    end
+
+    test "get_measurement!/1 returns the measurement with given id" do
+      measurement = measurement_fixture()
+      assert Metrics.get_measurement!(measurement.id) == measurement
+    end
+
+    test "create_measurement/1 with valid data creates a measurement" do
+      valid_attrs = %{ts: ~U[2024-01-29 07:00:00Z], value: "120.5"}
+
+      assert {:ok, %Measurement{} = measurement} = Metrics.create_measurement(valid_attrs)
+      assert measurement.ts == ~U[2024-01-29 07:00:00Z]
+      assert measurement.value == Decimal.new("120.5")
+    end
+
+    test "create_measurement/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Metrics.create_measurement(@invalid_attrs)
+    end
+
+    test "update_measurement/2 with valid data updates the measurement" do
+      measurement = measurement_fixture()
+      update_attrs = %{ts: ~U[2024-01-30 07:00:00Z], value: "456.7"}
+
+      assert {:ok, %Measurement{} = measurement} =
+               Metrics.update_measurement(measurement, update_attrs)
+
+      assert measurement.ts == ~U[2024-01-30 07:00:00Z]
+      assert measurement.value == Decimal.new("456.7")
+    end
+
+    test "update_measurement/2 with invalid data returns error changeset" do
+      measurement = measurement_fixture()
+      assert {:error, %Ecto.Changeset{}} = Metrics.update_measurement(measurement, @invalid_attrs)
+      assert measurement == Metrics.get_measurement!(measurement.id)
+    end
+
+    test "delete_measurement/1 deletes the measurement" do
+      measurement = measurement_fixture()
+      assert {:ok, %Measurement{}} = Metrics.delete_measurement(measurement)
+      assert_raise Ecto.NoResultsError, fn -> Metrics.get_measurement!(measurement.id) end
+    end
+
+    test "change_measurement/1 returns a measurement changeset" do
+      measurement = measurement_fixture()
+      assert %Ecto.Changeset{} = Metrics.change_measurement(measurement)
+    end
+  end
 end

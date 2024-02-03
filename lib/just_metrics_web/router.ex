@@ -25,9 +25,8 @@ defmodule JustMetricsWeb.Router do
     pipe_through :require_authenticated_user
 
     resources "/metrics", MetricController
+    resources "/measurements", MeasurementController
   end
-
-      
 
   # Other scopes may use custom stacks.
   # scope "/api", JustMetricsWeb do

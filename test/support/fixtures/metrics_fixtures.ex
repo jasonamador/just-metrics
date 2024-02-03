@@ -10,9 +10,7 @@ defmodule JustMetrics.MetricsFixtures do
   def metric_fixture(attrs \\ %{}) do
     {:ok, metric} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> JustMetrics.Metrics.create_metric()
 
     metric
@@ -31,5 +29,20 @@ defmodule JustMetrics.MetricsFixtures do
       |> JustMetrics.Metrics.create_metric()
 
     metric
+  end
+
+  @doc """
+  Generate a measurement.
+  """
+  def measurement_fixture(attrs \\ %{}) do
+    {:ok, measurement} =
+      attrs
+      |> Enum.into(%{
+        ts: ~U[2024-01-29 07:00:00Z],
+        value: "120.5"
+      })
+      |> JustMetrics.Metrics.create_measurement()
+
+    measurement
   end
 end
