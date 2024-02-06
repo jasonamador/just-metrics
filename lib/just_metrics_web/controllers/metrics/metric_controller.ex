@@ -3,6 +3,7 @@ defmodule JustMetricsWeb.MetricController do
 
   alias JustMetrics.Metrics
   alias JustMetrics.Metrics.Metric
+  alias JustMetrics.Measurements
 
   def index(conn, _params) do
     metrics = Metrics.list_metrics_for_user(conn.assigns.current_user)
@@ -28,7 +29,8 @@ defmodule JustMetricsWeb.MetricController do
 
   def show(conn, %{"id" => id}) do
     metric = Metrics.get_metric!(id)
-    render(conn, :show, metric: metric)
+    measurements = Measurements.list_measurements_for_metric(metric, 10)
+    render(conn, :show, metric: metric, measurements: measurements)
   end
 
   def edit(conn, %{"id" => id}) do

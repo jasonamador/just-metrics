@@ -19,13 +19,15 @@ defmodule JustMetricsWeb.Router do
 
   scope "/", JustMetricsWeb do
     pipe_through :browser
+    pipe_through :require_authenticated_user
 
     get "/", PageController, :home
 
-    pipe_through :require_authenticated_user
+    get "/dashboard", DashboardController, :default
+    get "/dashboard/:dashboard_id", DashboardController, :show
 
     resources "/metrics", MetricController
-    resources "/measurements", MeasurementController
+    resources "/metrics/:metric_id/measurements", MeasurementController
   end
 
   # Other scopes may use custom stacks.

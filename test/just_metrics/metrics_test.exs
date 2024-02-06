@@ -112,7 +112,7 @@ defmodule JustMetrics.MetricsTest do
   end
 
   describe "measurements" do
-    alias JustMetrics.Metrics.Measurement
+    alias JustMetrics.Measurements.Measurement
 
     import JustMetrics.MetricsFixtures
 

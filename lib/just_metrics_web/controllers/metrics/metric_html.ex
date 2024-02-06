@@ -1,7 +1,7 @@
 defmodule JustMetricsWeb.MetricHTML do
   use JustMetricsWeb, :html
 
-  embed_templates "metric_html/*"
+  embed_templates "html/*"
 
   @doc """
   Renders a metric form.

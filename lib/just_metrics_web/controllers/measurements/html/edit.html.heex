@@ -1,0 +1,7 @@
+<.header>
+  Edit <%= @metric.name %> Measurement <%= @measurement.id %>
+</.header>
+
+<.measurement_form changeset={@changeset} action={~p"/metrics/#{@metric}/measurements/#{@measurement}"} />
+
+<.back navigate={~p"/metrics/#{@metric}/measurements"}>Back to measurements</.back>

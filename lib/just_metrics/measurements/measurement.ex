@@ -1,4 +1,4 @@
-defmodule JustMetrics.Metrics.Measurement do
+defmodule JustMetrics.Measurements.Measurement do
   use Ecto.Schema
   import Ecto.Changeset
 

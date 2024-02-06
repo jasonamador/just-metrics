@@ -1,0 +1,8 @@
+<.header>
+  New Measurement
+  <:subtitle>Use this form to manage measurement records in your database.</:subtitle>
+</.header>
+
+<.measurement_form changeset={@changeset} action={~p"/metrics/#{@metric_id}/measurements"} />
+
+<.back navigate={~p"/metrics/#{@metric_id}/measurements"}>Back to measurements</.back>

@@ -1,0 +1,28 @@
+<div>
+  <.header>
+    <%= @metric.name %>
+    <:subtitle><%= @metric.unit %></:subtitle>
+    <:actions>
+      <.link href={~p"/metrics/#{@metric}/edit"}>
+        <.button>Edit</.button>
+      </.link>
+    </:actions>
+  </.header>
+</div>
+
+<div>
+  <.header>
+    Measurements
+    <:actions>
+      <.link href={~p"/metrics/#{@metric}/measurements/new"}>
+        <.button>New measurement</.button>
+      </.link>
+    </:actions>
+  </.header>
+  <.table rows={@measurements} id="measurements">
+    <:col :let={measurement} label="Ts"><%= measurement.ts %></:col>
+    <:col :let={measurement} label="Value"><%= measurement.value %></:col>
+  </.table>
+</div>
+
+<.back navigate={~p"/metrics"}>Back to metrics</.back>

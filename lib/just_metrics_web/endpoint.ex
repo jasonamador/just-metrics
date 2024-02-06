@@ -47,5 +47,11 @@ defmodule JustMetricsWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug :introspect
   plug JustMetricsWeb.Router
+
+  def introspect(conn, _opts) do
+    IO.inspect(conn)
+    conn
+  end
 end
